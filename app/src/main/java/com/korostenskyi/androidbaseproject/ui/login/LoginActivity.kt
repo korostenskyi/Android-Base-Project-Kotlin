@@ -1,13 +1,16 @@
-package com.korostenskyi.androidbaseproject.ui
+package com.korostenskyi.androidbaseproject.ui.login
 
 import android.content.Intent
 import android.os.Bundle
 import com.korostenskyi.androidbaseproject.R
+import com.korostenskyi.androidbaseproject.ui.MainActivity
 import com.korostenskyi.androidbaseproject.ui.base.BaseActivity
-import com.korostenskyi.androidbaseproject.utils.UserInputUtils
 import kotlinx.android.synthetic.main.activity_login.*
+import org.koin.android.ext.android.inject
 
 class LoginActivity : BaseActivity() {
+
+    private val viewModel: LoginViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,19 +21,17 @@ class LoginActivity : BaseActivity() {
             val username = username_et.text.toString()
             val password = password_et.text.toString()
 
-            val validateUsername = UserInputUtils.validateUsername(username)
-            val validatePassword = UserInputUtils.validatePassword(password)
+            val validateUsername = viewModel.validateUsername(username)
+            val validatePassword = viewModel.validatePassword(password)
 
             if (!validateUsername) {
                 showToastLong("Username must be at least 4 characters long and not to have special symbols")
-            }
-
-            if (!validatePassword) {
+            } else if (!validatePassword) {
                 showToastLong("Password must be at least 8 characters long and not to have special symbols")
+            } else {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
             }
-
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
         }
     }
 }
