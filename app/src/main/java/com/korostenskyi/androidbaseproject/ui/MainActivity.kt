@@ -1,7 +1,8 @@
-package com.korostenskyi.androidbaseproject
+package com.korostenskyi.androidbaseproject.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.korostenskyi.androidbaseproject.R
 
 class MainActivity : AppCompatActivity() {
 
