@@ -1,9 +1,13 @@
 package com.korostenskyi.androidbaseproject.ui.login
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
+import com.korostenskyi.androidbaseproject.utils.NetworkUtils
 import com.korostenskyi.androidbaseproject.utils.UserInputUtils
 
 class LoginViewModel: ViewModel() {
+
+    fun checkNetworkAvailability(context: Context): Boolean = NetworkUtils.isNetworkAvailable(context)
 
     fun validateUsername(username: String): Boolean = UserInputUtils.validateUsername(username)
 

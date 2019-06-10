@@ -18,25 +18,32 @@ class LoginActivity : BaseActivity() {
 
         sign_in_btn.setOnClickListener {
 
-            val username = username_et.text.toString()
-            val password = password_et.text.toString()
+            val isNetworkAvailable = viewModel.checkNetworkAvailability(this)
 
-            val validateUsername = viewModel.validateUsername(username)
-            val validatePassword = viewModel.validatePassword(password)
-
-            if (!validateUsername) {
-                showToastLong("Username must be at least 4 characters long and not to have special symbols")
-            } else if (!validatePassword) {
-                showToastLong("Password must be at least 8 characters long and not to have special symbols")
+            if (!isNetworkAvailable) {
+                // TODO: Implement intent to network settings
+                showToastShort("No network connection!")
             } else {
+                val username = username_et.text.toString()
+                val password = password_et.text.toString()
 
-                val validateCredentials = viewModel.validateCredentials(username, password)
+                val validateUsername = viewModel.validateUsername(username)
+                val validatePassword = viewModel.validatePassword(password)
 
-                if (!validateCredentials) {
-                    showToastShort("Username or password is incorrect")
+                if (!validateUsername) {
+                    showToastLong("Username must be at least 4 characters long and not to have special symbols")
+                } else if (!validatePassword) {
+                    showToastLong("Password must be at least 8 characters long and not to have special symbols")
                 } else {
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
+
+                    val validateCredentials = viewModel.validateCredentials(username, password)
+
+                    if (!validateCredentials) {
+                        showToastShort("Username or password is incorrect")
+                    } else {
+                        startActivity(Intent(this, MainActivity::class.java))
+                        finish()
+                    }
                 }
             }
         }
