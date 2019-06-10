@@ -29,8 +29,15 @@ class LoginActivity : BaseActivity() {
             } else if (!validatePassword) {
                 showToastLong("Password must be at least 8 characters long and not to have special symbols")
             } else {
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
+
+                val validateCredentials = viewModel.validateCredentials(username, password)
+
+                if (!validateCredentials) {
+                    showToastShort("Username or password is incorrect")
+                } else {
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                }
             }
         }
     }
