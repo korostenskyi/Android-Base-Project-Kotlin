@@ -1,0 +1,21 @@
+ext {
+
+    // Kotlin
+    kotlinVersion = '1.3.61'
+
+    // Android
+    appCompatVersion = '1.1.0'
+    ktxVersion = '1.1.0'
+    constrainLayoutVersion = '1.1.3'
+    legacyVersion = '1.0.0'
+    navigationVersion = '2.1.0'
+    materialComponentsVersion = '1.2.0-alpha03'
+
+    // Dagger
+    daggerVersion = '2.25.4'
+
+    // Test
+    jUnitVersion = '4.13'
+    testRunnerVersion = '1.2.0'
+    espressoVersion = '3.2.0'
+}
