@@ -1,13 +1,11 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion = '29.0.2'
-    flavorDimensions "default"
+    buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "com.korostenskyi.androidbaseproject"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
@@ -30,16 +28,14 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    productFlavors {
-        all {}
-        develop {}
-        production {}
-    }
+}
+
+repositories {
+    mavenCentral()
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':data')
     implementation project(':domain')
 
     // Kotlin
@@ -47,8 +43,6 @@ dependencies {
 
     // Android
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
-    implementation "androidx.core:core-ktx:$ktxVersion"
-    implementation "androidx.constraintlayout:constraintlayout:$constrainLayoutVersion"
 
     // Test
     testImplementation "junit:junit:$jUnitVersion"
