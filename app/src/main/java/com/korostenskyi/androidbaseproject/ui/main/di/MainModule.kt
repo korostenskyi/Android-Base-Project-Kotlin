@@ -6,7 +6,7 @@ import com.korostenskyi.androidbaseproject.ui.routing.impl.RouterImpl
 import dagger.Binds
 import dagger.Module
 
-@Module
+@Module(includes = [MainFragmentBindingModule::class])
 abstract class MainModule {
 
     @Binds
