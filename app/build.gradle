@@ -50,6 +50,9 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation "androidx.core:core-ktx:$ktxVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constrainLayoutVersion"
+    implementation "androidx.legacy:legacy-support-v4:$legacyVersion"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 
     // Dagger 2
     implementation "com.google.dagger:dagger:$daggerVersion"

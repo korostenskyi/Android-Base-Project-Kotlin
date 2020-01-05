@@ -7,6 +7,8 @@ ext {
     appCompatVersion = '1.1.0'
     ktxVersion = '1.1.0'
     constrainLayoutVersion = '1.1.3'
+    legacyVersion = '1.0.0'
+    navigationVersion = '2.1.0'
 
     // Dagger
     daggerVersion = '2.25.4'
