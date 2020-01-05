@@ -38,6 +38,7 @@ repositories {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':domain')
+    implementation project(':utils')
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"

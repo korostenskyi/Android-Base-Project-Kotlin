@@ -2,10 +2,13 @@ package com.korostenskyi.androidbaseproject.ui.base.viewModel
 
 import androidx.annotation.CallSuper
 import androidx.lifecycle.ViewModel
+import com.korostenskyi.utils.InternalLogger
 
 abstract class BaseViewModel : ViewModel() {
 
-    // TODO: Add InternalLogger logs here
+    init {
+        InternalLogger.viewModelEvent("${javaClass.simpleName} init")
+    }
 
     @CallSuper
     open fun onCreate() {}
@@ -33,6 +36,7 @@ abstract class BaseViewModel : ViewModel() {
 
     @CallSuper
     override fun onCleared() {
+        InternalLogger.viewModelEvent("${javaClass.simpleName} onCleared")
         super.onCleared()
     }
 }
