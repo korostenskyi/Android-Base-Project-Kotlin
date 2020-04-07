@@ -5,28 +5,20 @@ import android.view.View
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.korostenskyi.androidbaseproject.ui.base.viewModel.BaseViewModel
 import com.korostenskyi.utils.InternalLogger
-import dagger.android.support.AndroidSupportInjection
-import javax.inject.Inject
 
 abstract class ViewModelFragment<V : BaseViewModel>(
-    @LayoutRes layoutId: Int,
-    private val vmClass: Class<V>
+    @LayoutRes layoutId: Int
 ) : Fragment(layoutId) {
 
-    @Inject lateinit var vmFactory: ViewModelProvider.Factory
-    protected lateinit var viewModel: V
+    protected abstract val viewModel: V
 
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         InternalLogger.lifecycleEvent("${javaClass.simpleName} onCreate")
-        AndroidSupportInjection.inject(this)
-        viewModel = ViewModelProvider(this, vmFactory).get(vmClass).apply {
-            onCreate()
-        }
+        viewModel.onCreate()
     }
 
     @CallSuper

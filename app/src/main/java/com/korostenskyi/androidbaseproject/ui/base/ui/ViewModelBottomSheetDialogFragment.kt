@@ -7,23 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
-import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.korostenskyi.androidbaseproject.R
 import com.korostenskyi.androidbaseproject.ui.base.viewModel.BaseViewModel
 import com.korostenskyi.utils.InternalLogger
-import dagger.android.support.AndroidSupportInjection
-import javax.inject.Inject
 
 abstract class ViewModelBottomSheetDialogFragment<V : BaseViewModel>(
-    @LayoutRes private val layoutId: Int,
-    private val vmClass: Class<V>
+    @LayoutRes private val layoutId: Int
 ) : BottomSheetDialogFragment() {
 
-    @Inject lateinit var vmFactory: ViewModelProvider.Factory
-
-    protected lateinit var viewModel: V
+    protected abstract val viewModel: V
 
     override fun getTheme(): Int = R.style.PROJECT_NAME_Theme_BottomSheetDialog
 
@@ -44,8 +38,7 @@ abstract class ViewModelBottomSheetDialogFragment<V : BaseViewModel>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         InternalLogger.lifecycleEvent("${javaClass.simpleName} onCreate")
-        AndroidSupportInjection.inject(this)
-        viewModel = ViewModelProvider(this, vmFactory).get(vmClass)
+        viewModel.onCreate()
     }
 
     @CallSuper

@@ -1,20 +1,42 @@
 package com.korostenskyi.androidbaseproject.ui.routing.impl
 
-import androidx.navigation.Navigation.findNavController
-import com.korostenskyi.androidbaseproject.R
-import com.korostenskyi.androidbaseproject.ui.main.MainActivity
+import android.os.Bundle
+import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import com.korostenskyi.androidbaseproject.ui.routing.Router
-import javax.inject.Inject
 
-class RouterImpl @Inject constructor(
-    private val activity: MainActivity
-): Router {
+class RouterImpl(private val navController: NavController): Router {
 
-    override fun goBack() {
-        findNavController(activity, R.id.nav_host_fragment).popBackStack()
+    override fun back() {
+        navController.navigateUp()
     }
 
-    override fun navigateHome() {
-        findNavController(activity, R.id.nav_host_fragment).navigate(R.id.fragmentHome)
+    private fun navigate(
+        destinationId: Int,
+        popStrategy: PopStrategy = PopStrategy.NONE,
+        bundle: Bundle? = null
+    ) {
+        val navOptions = NavOptions.Builder()
+            .setPopStrategy(popStrategy)
+            .build()
+        navController.navigate(destinationId, bundle, navOptions)
+    }
+
+    private fun NavOptions.Builder.setPopStrategy(strategy: PopStrategy): NavOptions.Builder {
+        return when (strategy) {
+            PopStrategy.NONE -> this
+            PopStrategy.LATEST -> setPopLatest()
+            PopStrategy.ALL -> setPopAll()
+        }
+    }
+
+    private fun NavOptions.Builder.setPopLatest(): NavOptions.Builder {
+        return navController.currentDestination
+            ?.let { setPopUpTo(it.id, true) }
+            ?: this
+    }
+
+    private fun NavOptions.Builder.setPopAll(): NavOptions.Builder {
+        return setPopUpTo(navController.graph.id, false)
     }
 }
