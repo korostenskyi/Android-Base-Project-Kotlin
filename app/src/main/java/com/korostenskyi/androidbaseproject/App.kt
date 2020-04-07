@@ -1,33 +1,20 @@
 package com.korostenskyi.androidbaseproject
 
 import android.app.Application
-import com.korostenskyi.androidbaseproject.di.AppComponent
-import com.korostenskyi.androidbaseproject.di.DaggerAppComponent
-import com.korostenskyi.androidbaseproject.di.modules.ApplicationModule
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasAndroidInjector
-import javax.inject.Inject
+import com.korostenskyi.androidbaseproject.di.applicationModule
+import com.korostenskyi.androidbaseproject.ui.presentation.di.presentationModule
+import com.korostenskyi.data.di.dataModule
+import com.korostenskyi.domain.di.domainModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
-class App: Application(), HasAndroidInjector {
-
-    @Inject lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
-
-    override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector
+class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        initDagger()
-    }
-
-    private fun initDagger() {
-        appComponent = DaggerAppComponent.builder()
-            .applicationModule(ApplicationModule(this))
-            .build()
-            .apply { inject(this@App) }
-    }
-
-    companion object {
-        lateinit var appComponent: AppComponent
+        startKoin {
+            androidContext(this@App)
+            modules(applicationModule + presentationModule + dataModule + domainModule)
+        }
     }
 }

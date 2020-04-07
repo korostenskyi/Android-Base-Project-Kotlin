@@ -1,6 +1,5 @@
 package com.korostenskyi.domain.di
 
-import dagger.Module
+import org.koin.dsl.module
 
-@Module
-abstract class DomainModule
+val domainModule = module { }

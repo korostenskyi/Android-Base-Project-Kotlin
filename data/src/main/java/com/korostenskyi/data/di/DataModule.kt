@@ -1,6 +1,5 @@
 package com.korostenskyi.data.di
 
-import dagger.Module
+import org.koin.dsl.module
 
-@Module
-abstract class DataModule
+val dataModule = module { }
