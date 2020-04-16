@@ -28,6 +28,9 @@ dependencies {
     // Koin
     implementation "org.koin:koin-core:$koinVersion"
 
+    // SLF4J
+    implementation 'org.slf4j:slf4j-api:1.7.30'
+
     // Test
     testImplementation "junit:junit:$jUnitVersion"
 }

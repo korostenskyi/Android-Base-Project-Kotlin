@@ -6,7 +6,7 @@ import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import com.korostenskyi.androidbaseproject.ui.base.viewModel.BaseViewModel
-import com.korostenskyi.utils.InternalLogger
+import timber.log.Timber
 
 abstract class ViewModelFragment<V : BaseViewModel>(
     @LayoutRes layoutId: Int
@@ -17,56 +17,60 @@ abstract class ViewModelFragment<V : BaseViewModel>(
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        InternalLogger.lifecycleEvent("${javaClass.simpleName} onCreate")
+        Timber.tag(LIFECYCLE_EVENT_TAG).d("${javaClass.simpleName} onCreate")
         viewModel.onCreate()
     }
 
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        InternalLogger.lifecycleEvent("${javaClass.simpleName} onViewCreated")
+        Timber.tag(LIFECYCLE_EVENT_TAG).d("${javaClass.simpleName} onViewCreated")
         viewModel.onViewCreated()
     }
 
     @CallSuper
     override fun onStart() {
         super.onStart()
-        InternalLogger.lifecycleEvent("${javaClass.simpleName} onStart")
+        Timber.tag(LIFECYCLE_EVENT_TAG).d("${javaClass.simpleName} onStart")
         viewModel.onStart()
     }
 
     @CallSuper
     override fun onResume() {
         super.onResume()
-        InternalLogger.lifecycleEvent("${javaClass.simpleName} onResume")
+        Timber.tag(LIFECYCLE_EVENT_TAG).d("${javaClass.simpleName} onResume")
         viewModel.onResume()
     }
 
     @CallSuper
     override fun onPause() {
-        InternalLogger.lifecycleEvent("${javaClass.simpleName} onPause")
+        Timber.tag(LIFECYCLE_EVENT_TAG).d("${javaClass.simpleName} onPause")
         viewModel.onPause()
         super.onPause()
     }
 
     @CallSuper
     override fun onStop() {
-        InternalLogger.lifecycleEvent("${javaClass.simpleName} onStop")
+        Timber.tag(LIFECYCLE_EVENT_TAG).d("${javaClass.simpleName} onStop")
         viewModel.onStop()
         super.onStop()
     }
 
     @CallSuper
     override fun onDestroyView() {
-        InternalLogger.lifecycleEvent("${javaClass.simpleName} onDestroyView")
+        Timber.tag(LIFECYCLE_EVENT_TAG).d("${javaClass.simpleName} onDestroyView")
         viewModel.onDestroyView()
         super.onDestroyView()
     }
 
     @CallSuper
     override fun onDestroy() {
-        InternalLogger.lifecycleEvent("${javaClass.simpleName} onDestroy")
+        Timber.tag(LIFECYCLE_EVENT_TAG).d("${javaClass.simpleName} onDestroy")
         viewModel.onDestroy()
         super.onDestroy()
+    }
+
+    companion object {
+        private const val LIFECYCLE_EVENT_TAG = "LifecycleEvent"
     }
 }

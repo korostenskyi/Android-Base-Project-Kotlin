@@ -11,7 +11,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.korostenskyi.androidbaseproject.R
 import com.korostenskyi.androidbaseproject.ui.base.viewModel.BaseViewModel
-import com.korostenskyi.utils.InternalLogger
+import timber.log.Timber
 
 abstract class ViewModelBottomSheetDialogFragment<V : BaseViewModel>(
     @LayoutRes private val layoutId: Int
@@ -26,31 +26,31 @@ abstract class ViewModelBottomSheetDialogFragment<V : BaseViewModel>(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        InternalLogger.lifecycleEvent("${javaClass.simpleName} onCreateView")
+        Timber.tag(LIFECYCLE_EVENT_TAG).d("${javaClass.simpleName} onCreateView")
         return inflater.inflate(layoutId, container, false)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        InternalLogger.lifecycleEvent("${javaClass.simpleName} onCreateDialog")
+        Timber.tag(LIFECYCLE_EVENT_TAG).d("${javaClass.simpleName} onCreateDialog")
         return BottomSheetDialog(requireContext(), theme)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        InternalLogger.lifecycleEvent("${javaClass.simpleName} onCreate")
+        Timber.tag(LIFECYCLE_EVENT_TAG).d("${javaClass.simpleName} onCreate")
         viewModel.onCreate()
     }
 
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        InternalLogger.lifecycleEvent("${javaClass.simpleName} onViewCreated")
+        Timber.tag(LIFECYCLE_EVENT_TAG).d("${javaClass.simpleName} onViewCreated")
         viewModel.onViewCreated()
     }
 
     override fun onStart() {
         super.onStart()
-        InternalLogger.lifecycleEvent("${javaClass.simpleName} onStart")
+        Timber.tag(LIFECYCLE_EVENT_TAG).d("${javaClass.simpleName} onStart")
         dialog?.window?.apply {
             setBackgroundDrawable(null)
             setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
@@ -61,20 +61,24 @@ abstract class ViewModelBottomSheetDialogFragment<V : BaseViewModel>(
 
     override fun onResume() {
         super.onResume()
-        InternalLogger.lifecycleEvent("${javaClass.simpleName} onResume")
+        Timber.tag(LIFECYCLE_EVENT_TAG).d("${javaClass.simpleName} onResume")
         viewModel.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        InternalLogger.lifecycleEvent("${javaClass.simpleName} onPause")
+        Timber.tag(LIFECYCLE_EVENT_TAG).d("${javaClass.simpleName} onPause")
         viewModel.onPause()
     }
 
     @CallSuper
     override fun onDestroyView() {
         super.onDestroyView()
-        InternalLogger.lifecycleEvent("${javaClass.simpleName} onDestroyView")
+        Timber.tag(LIFECYCLE_EVENT_TAG).d("${javaClass.simpleName} onDestroyView")
         viewModel.onDestroyView()
+    }
+
+    companion object {
+        private const val LIFECYCLE_EVENT_TAG = "LifecycleEvent"
     }
 }
