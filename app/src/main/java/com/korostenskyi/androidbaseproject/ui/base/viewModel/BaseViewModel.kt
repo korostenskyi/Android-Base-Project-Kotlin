@@ -2,12 +2,12 @@ package com.korostenskyi.androidbaseproject.ui.base.viewModel
 
 import androidx.annotation.CallSuper
 import androidx.lifecycle.ViewModel
-import com.korostenskyi.utils.InternalLogger
+import timber.log.Timber
 
 abstract class BaseViewModel : ViewModel() {
 
     init {
-        InternalLogger.viewModelEvent("${javaClass.simpleName} init")
+        Timber.tag(VIEWMODEL_EVENT_TAG).d("${javaClass.simpleName} init")
     }
 
     @CallSuper
@@ -36,7 +36,11 @@ abstract class BaseViewModel : ViewModel() {
 
     @CallSuper
     override fun onCleared() {
-        InternalLogger.viewModelEvent("${javaClass.simpleName} onCleared")
+        Timber.tag(VIEWMODEL_EVENT_TAG).d("${javaClass.simpleName} onCleared")
         super.onCleared()
+    }
+
+    companion object {
+        private const val VIEWMODEL_EVENT_TAG = "ViewModelEvent"
     }
 }
