@@ -1,6 +1,6 @@
 package com.korostenskyi.androidbaseproject.ui.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import com.korostenskyi.androidbaseproject.R
+import com.korostenskyi.androidbaseproject.ui.base.ui.BaseActivity
 
-class MainActivity : AppCompatActivity(R.layout.activity_main)
+class MainActivity : BaseActivity(R.layout.activity_main)

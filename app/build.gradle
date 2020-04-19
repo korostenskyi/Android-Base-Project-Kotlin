@@ -50,16 +50,18 @@ dependencies {
     implementation "androidx.core:core-ktx:$ktxVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constrainLayoutVersion"
     implementation "androidx.legacy:legacy-support-v4:$legacyVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
     implementation "com.google.android.material:material:$materialComponentsVersion"
 
     // Koin
     implementation "org.koin:koin-androidx-viewmodel:$koinVersion"
+    implementation "org.koin:koin-androidx-fragment:$koinVersion"
 
     // Timber
     implementation "com.jakewharton.timber:timber:$timberVersion"
-    implementation 'at.favre.lib:slf4j-timber:1.0.0'
+    implementation 'at.favre.lib:slf4j-timber:1.0.1'
 
     // Test
     testImplementation "junit:junit:$jUnitVersion"

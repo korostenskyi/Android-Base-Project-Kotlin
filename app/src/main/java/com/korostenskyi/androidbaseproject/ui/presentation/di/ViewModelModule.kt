@@ -4,7 +4,7 @@ import com.korostenskyi.androidbaseproject.ui.presentation.screens.home.HomeView
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val presentationModule = module {
+val viewModelModule = module {
 
     viewModel { HomeViewModel() }
 }
