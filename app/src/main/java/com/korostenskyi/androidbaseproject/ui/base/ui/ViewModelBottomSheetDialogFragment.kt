@@ -13,11 +13,10 @@ import com.korostenskyi.androidbaseproject.R
 import com.korostenskyi.androidbaseproject.ui.base.viewModel.BaseViewModel
 import timber.log.Timber
 
-abstract class ViewModelBottomSheetDialogFragment<V : BaseViewModel>(
-    @LayoutRes private val layoutId: Int
+abstract class ViewModelBottomSheetDialogFragment<in V : BaseViewModel>(
+    @LayoutRes private val layoutId: Int,
+    private val viewModel: V
 ) : BottomSheetDialogFragment() {
-
-    protected abstract val viewModel: V
 
     override fun getTheme(): Int = R.style.PROJECT_NAME_Theme_BottomSheetDialog
 

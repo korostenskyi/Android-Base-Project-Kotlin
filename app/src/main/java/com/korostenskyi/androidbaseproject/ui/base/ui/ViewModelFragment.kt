@@ -8,11 +8,10 @@ import androidx.fragment.app.Fragment
 import com.korostenskyi.androidbaseproject.ui.base.viewModel.BaseViewModel
 import timber.log.Timber
 
-abstract class ViewModelFragment<V : BaseViewModel>(
-    @LayoutRes layoutId: Int
+abstract class ViewModelFragment<in V : BaseViewModel>(
+    @LayoutRes layoutId: Int,
+    private val viewModel: V
 ) : Fragment(layoutId) {
-
-    protected abstract val viewModel: V
 
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
